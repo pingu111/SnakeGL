@@ -1,0 +1,29 @@
+﻿  texturerepository.cpp
+  texture.cpp
+  shaderrepository.cpp
+  shader.cpp
+d:\telechargements\4_camera\4 camera\opengltools\shader.cpp(21): warning C4244: 'argument' : conversion de 'std::streamoff' en 'unsigned int', perte possible de données
+d:\telechargements\4_camera\4 camera\opengltools\shader.cpp(34): warning C4805: '!=' : mélange risqué de type 'int' et de type 'bool' dans l'opération
+  program.cpp
+d:\telechargements\4_camera\4 camera\opengltools\program.cpp(21): warning C4805: '!=' : mélange risqué de type 'int' et de type 'bool' dans l'opération
+  modelrenderer.cpp
+d:\telechargements\4_camera\4 camera\opengltools\model\modelrenderer.cpp(14): warning C4018: '<' : incompatibilité signed/unsigned
+d:\telechargements\4_camera\4 camera\opengltools\model\modelrenderer.cpp(38): warning C4018: '<' : incompatibilité signed/unsigned
+d:\telechargements\4_camera\4 camera\opengltools\model\modelrenderer.cpp(49): warning C4018: '<' : incompatibilité signed/unsigned
+d:\telechargements\4_camera\4 camera\opengltools\model\modelrenderer.cpp(60): warning C4018: '<' : incompatibilité signed/unsigned
+  modelimporter.cpp
+  mesh.cpp
+  material.cpp
+  windowinput.cpp
+  mouseinput.cpp
+  keyboardinput.cpp
+  framebuffer.cpp
+  device.cpp
+  contextinitializer.cpp
+  main.cpp
+  camera.cpp
+d:\telechargements\4_camera\4 camera\camera.cpp(21): warning C4244: 'initialisation' : conversion de 'double' en 'float', perte possible de données
+d:\telechargements\4_camera\4 camera\camera.cpp(22): warning C4244: 'initialisation' : conversion de 'double' en 'float', perte possible de données
+  Génération de code en cours...
+  4 Camera.vcxproj -> D:\Telechargements\4_Camera\4 Camera\Debug\4 Camera.exe
+  4 Camera.vcxproj -> D:\Telechargements\4_Camera\4 Camera\Debug\4 Camera.pdb (Full PDB)
