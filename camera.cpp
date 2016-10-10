@@ -34,7 +34,9 @@ void CameraFPS::mComputeForwardVector(void)
 void CameraFPS::update(void)
 {
     // Mouse
-    mPhi   -= mMouseInput->yRel() * mSensitivity;
+
+	// We just look horizontally, not vertically
+	/* mPhi   -= mMouseInput->yRel() * mSensitivity;*/
     mTheta -= mMouseInput->xRel() * mSensitivity;
 
     if(mPhi > 89.0f)

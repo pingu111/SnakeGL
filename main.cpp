@@ -15,7 +15,7 @@ using namespace std;
 
 int main(int argc, char *argv[])
 {
-    Device device(800, 600, "OpenGL", 3, 3, true);
+    Device device(800, 600, "SnakeGL", 3, 3, true);
     std::shared_ptr<WindowInput> windowInput(std::make_shared<WindowInput>());
     std::shared_ptr<KeyboardInput> keyboardInput(std::make_shared<KeyboardInput>());
     std::shared_ptr<MouseInput> mouseInput(std::make_shared<MouseInput>());
@@ -73,6 +73,9 @@ int main(int argc, char *argv[])
         sponza.draw(true, colorLocation, useTextureLocation);
 
         device.swapBuffers();
+
+		if (keyboardInput->key(SDL_SCANCODE_ESCAPE))
+			return 0;
     }
 
     return 0;
