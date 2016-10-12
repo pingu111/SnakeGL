@@ -1,17 +1,24 @@
 #version 330
 
-layout(location = 0) in vec3 inPosition;
+// Données entrantes depuis le VAO
+layout(location = 0) in vec3 inPos;
 layout(location = 1) in vec3 inNormal;
-layout(location = 2) in vec2 inUv;
+layout(location = 2) in vec2 inTextureCoordinate;
 
-out vec2 uv;
+// Données sortantes vers le Fragment Shader
+out vec3 normal;
+out vec2 textureCoordinate;
 
-uniform mat4 model;
-uniform mat4 view;
-uniform mat4 proj;
+// Définit le type de matrices
+#define WORLD 0
+#define VIEW 1
+#define PROJ 2
 
-void main(void)
-{
-    gl_Position = proj * view * model * vec4(inPosition, 1.0);
-    uv = inUv;
+// Tableau des 3 matrices
+uniform mat4 matrices[3];
+
+void main(void) {
+    gl_Position = matrices[PROJ] * matrices[VIEW] * matrices[WORLD] * vec4(inPos, 1);
+    textureCoordinate = inTextureCoordinate;
+	normal = transpose(inverse(mat3(matrices[VIEW] * matrices[WORLD]))) * inNormal;
 }

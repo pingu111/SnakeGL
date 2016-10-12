@@ -10,7 +10,7 @@ public:
     GLuint image2D(std::string const &path);
 
 private:
-    std::unordered_map<std::string, std::unique_ptr<Texture>> mTextures;
+    unordered_map<string, unique_ptr<Texture>> mTextures;
 };
 
 #endif // TEXTUREREPOSITORY_H

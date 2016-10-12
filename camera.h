@@ -38,14 +38,14 @@ protected:
     std::shared_ptr<KeyboardInput> mKeyboardInput;
     std::map<CameraKeyMap, SDL_Keycode> mKeyMap; //!< KeyMapping
 
-    glm::vec3 mForward, mLeft; //!< vector forward and left for deplacement
+    glm::vec3 mForward, mLeft; //!<vector forward and left for deplacement
 
     float mPhi, mTheta; //!< Angle for spherical coordinate
 
     float mSpeed, mSensitivity; //!< Variable for speed
 
     /**
-        * @brief Compute the forward vector
+        * @brief Compute the forwardstd::vector
         */
     void mComputeForwardVector(void);
 };

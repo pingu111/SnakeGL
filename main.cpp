@@ -1,82 +1,120 @@
-#include <GL/glew.h>
 #include "OpenGLTools/device.h"
 #include "OpenGLTools/Input/windowinput.h"
-#include "OpenGLTools/Input/keyboardinput.h"
 #include "OpenGLTools/Input/mouseinput.h"
+#include "OpenGLTools/Input/keyboardinput.h"
 #include "OpenGLTools/shaderrepository.h"
 #include "OpenGLTools/program.h"
 #include "OpenGLTools/glm.h"
 #include "OpenGLTools/texturerepository.h"
-#include "OpenGLTools/Model/modelrenderer.h"
+#include "OpenGLTools\Model\modelrenderer.h"
 #include "camera.h"
 #include <iostream>
+#include <GL/glew.h>
 
 using namespace std;
 
 int main(int argc, char *argv[])
 {
+	/* Initialisation du Contexte OpenGL en version 3.3 */
     Device device(800, 600, "SnakeGL", 3, 3, true);
-    std::shared_ptr<WindowInput> windowInput(std::make_shared<WindowInput>());
-    std::shared_ptr<KeyboardInput> keyboardInput(std::make_shared<KeyboardInput>());
-    std::shared_ptr<MouseInput> mouseInput(std::make_shared<MouseInput>());
+
+	// Ajout de la gestion des événements
+    auto windowInput(make_shared<WindowInput>());
+	auto mouseInput(make_shared<MouseInput>());
+	auto keyboardInput(make_shared<KeyboardInput>());
     device.assignInput(windowInput);
-    device.assignInput(keyboardInput);
-    device.assignInput(mouseInput);
+	device.assignInput(mouseInput);
+	device.assignInput(keyboardInput);
 
-    TextureRepository textureRepository;
-    ShaderRepository shaderRepository;
+	// On cache le curseur et on l'emprisonne dans la fenêtre.
+	device.hideCursor();
 
-	ModelRenderer cube("../Models/CubeBasic.obj", textureRepository);
+	// Classes permettant de gérer les shaders et programs
+	ShaderRepository sR;
+	Program modelProgram;
 
-    Program modelProgram;
+	// Classe permettant de charger les textures
+	TextureRepository textureRepository;
+	unique_ptr<ModelRenderer> modelRenderer;
 
-    modelProgram.attach(shaderRepository.shader("../Shaders/model.vert", GL_VERTEX_SHADER));
-    modelProgram.attach(shaderRepository.shader("../Shaders/model.frag", GL_FRAGMENT_SHADER));
+	// On test les erreurs
+	try {
+		// Charge les shaders et les lie en un program
+		modelProgram.attach(sR.shader("../Shaders/model.vert", GL_VERTEX_SHADER));
+		modelProgram.attach(sR.shader("../Shaders/model.frag", GL_FRAGMENT_SHADER));
+		modelProgram.link();
 
-    modelProgram.link();
+		// On tente d'ouvrir un modèle 3D (ici Sponza atrium)
+		modelRenderer =std::make_unique<ModelRenderer>("../Models/CubeBasic.obj", textureRepository);
+	}
 
-    glm::mat4 proj = glm::perspective(glm::radians(70.0f), 800.f / 600.f, 1.f, 10000.f);
-    glm::mat4 view = glm::lookAt(glm::vec3(700, 1000, 1), glm::vec3(0, 500, 10), glm::vec3(0, 1, 0));
-    glm::mat4 model = glm::mat4(1.f);
+	catch (runtime_error const &exception) {
+		cerr << exception.what() << endl;
+	}
 
-    int projLocation = glGetUniformLocation(modelProgram, "proj");
-    int viewLocation = glGetUniformLocation(modelProgram, "view");
-    int modelLocation = glGetUniformLocation(modelProgram, "model");
-    int texLocation = glGetUniformLocation(modelProgram, "tex");
-    int colorLocation = glGetUniformLocation(modelProgram, "color");
-    int useTextureLocation = glGetUniformLocation(modelProgram, "useTexture");
+	// On récupère les différentes locations correpondant aux variables uniforms des shaders model.vert/frag
+	int locationMatrices = glGetUniformLocation(modelProgram, "matrices");
+	int locationDiffuseTexture = glGetUniformLocation(modelProgram, "diffuseTexture");
+	int locationDiffuseColor = glGetUniformLocation(modelProgram, "diffuseColor");
+	int locationUseTexture = glGetUniformLocation(modelProgram, "useTexture");
 
-    glUseProgram(modelProgram);
-    glUniformMatrix4fv(projLocation, 1, false, glm::value_ptr(proj));
-    glUniformMatrix4fv(modelLocation, 1, false, glm::value_ptr(model));
-    glUniform1i(texLocation, 0);
-    glUseProgram(0);
+	// On assigne la textureDiffuse à l'unité de texture 0
+	glUseProgram(modelProgram);
+	glUniform1i(locationDiffuseTexture, 0);
+	glUseProgram(0);
 
-    glEnable(GL_DEPTH_TEST);
+	glEnable(GL_DEPTH_TEST); // On active le test de profondeur
 
-  //  CameraFPS camera(glm::vec3(700, 1000, 1), 5, 1, mouseInput, keyboardInput);
-    CameraFPS camera(glm::vec3(1, 1, 1), 1, 1, mouseInput, keyboardInput);
+	// On crée notre caméra
+	CameraFPS camera(glm::vec3(1, 1, 1), 2.0f, 1.f, mouseInput, keyboardInput);
 
-    device.hideCursor();
+    while(windowInput->isRunning()) {
+		if (!device.updateInputs())
+			mouseInput->resetRelative();
 
-    while(windowInput->isRunning()) 
-	{
-        if(!device.updateInputs())
-            mouseInput->resetRelative();
-
-		camera.update();
-
-        view = camera.view();
-
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-        glUseProgram(modelProgram);
-        glUniformMatrix4fv(viewLocation, 1, false, glm::value_ptr(view));
-
-        cube.draw(true, colorLocation);
-        device.swapBuffers();
-
+		// Echap = quit
 		if (keyboardInput->key(SDL_SCANCODE_ESCAPE))
 			return 0;
+
+
+		// On update la caméra
+		camera.update();
+
+		// Efface l'écran et le depth buffer
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+	
+
+		// On utilise le modelProgram qui va nous servir pour le rendu de notre modèle3D
+		glUseProgram(modelProgram);
+		glm::mat4 matrices[3];
+#define WORLD 0
+#define VIEW 1
+#define PROJ 2
+		/* Matrice Modèle
+			Peut contenir les transformations comme :
+				- Les translations
+				- Les rotations
+				- Les changements d'échelles / homothéties */
+		matrices[WORLD] = glm::mat4(1.f); 
+
+		/* Matrice View
+			Correspond tout simplement à la caméra */
+		matrices[VIEW] = camera.view();
+
+		/* Matrice de projection
+			Correspond à la projection, ici on choisit la projection en perspective */
+		matrices[PROJ] = glm::perspective(glm::radians(70.f), 4.f / 3, 1.f, 10000.f);
+
+		// on envoie les 3 matrices à notre tableau de matrice
+		glUniformMatrix4fv(locationMatrices, 3, false, glm::value_ptr(matrices[0]));
+
+		/* On dessine l'objet en prenant compte les matériaux,
+		   La classe attends la location des variables diffuseColor (un vec3)
+													 et useTexture (unt int) */
+		modelRenderer->draw(true, locationDiffuseColor, locationUseTexture);
+
+        device.swapBuffers();
     }
 
     return 0;

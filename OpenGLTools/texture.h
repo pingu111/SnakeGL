@@ -14,8 +14,8 @@ public:
     ~Texture();
 
 public:
-    static std::unique_ptr<Texture> loadImage2D(std::string const &path);
-    static std::shared_ptr<Texture> texture2D(GLuint w, GLuint h, GLenum internalFormat);
+    static unique_ptr<Texture> loadImage2D(std::string const &path);
+    static shared_ptr<Texture> texture2D(GLuint w, GLuint h, GLenum internalFormat);
 
 private:
     static void getFormats(SDL_Surface *img, GLenum &internalFormat, GLenum &format);

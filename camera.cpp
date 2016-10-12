@@ -10,6 +10,7 @@ CameraFPS::CameraFPS(glm::vec3 const &pos,
     mPhi(0.0), mTheta(0.0),
     mSpeed(speed), mSensitivity(sensitivity)
 {
+	// Z, S, Q, D : Qwerty way
     mKeyMap[FORWARD] = SDL_SCANCODE_W;
     mKeyMap[BACKWARD] = SDL_SCANCODE_S;
     mKeyMap[LEFT] = SDL_SCANCODE_A;
@@ -18,6 +19,7 @@ CameraFPS::CameraFPS(glm::vec3 const &pos,
 
 void CameraFPS::mComputeForwardVector(void)
 {
+	// Calcul du vecteur de direction en fonction des coordonnées sphériques
     float phiRad = mPhi * M_PI / 180.0f;
     float thetaRad = mTheta * M_PI / 180.0f;
 
@@ -34,9 +36,7 @@ void CameraFPS::mComputeForwardVector(void)
 void CameraFPS::update(void)
 {
     // Mouse
-
-	// We just look horizontally, not vertically
-	// mPhi   -= mMouseInput->yRel() * mSensitivity;
+    mPhi   -= mMouseInput->yRel() * mSensitivity;
     mTheta -= mMouseInput->xRel() * mSensitivity;
 
     if(mPhi > 89.0f)

@@ -6,19 +6,19 @@ Texture::Texture()
     glGenTextures(1, &mId);
 }
 
-std::unique_ptr<Texture> Texture::loadImage2D(const std::string &path) {
-    std::unique_ptr<Texture> texture = std::make_unique<Texture>();
+unique_ptr<Texture> Texture::loadImage2D(const std::string &path) {
+    unique_ptr<Texture> texture =std::make_unique<Texture>();
 
     SDL_Surface *surface = IMG_Load(path.c_str());
 
     if(surface == nullptr)
-        throw std::runtime_error(path + " does not opened");
+        throw runtime_error(path + " does not opened");
 
     GLenum format, internalFormat;
 
     getFormats(surface, internalFormat, format);
 
-    GLsizei numMipmaps = ((GLsizei)log2(std::max(surface->w, surface->h)) + 1);
+    GLsizei numMipmaps = ((GLsizei)log2(max(surface->w, surface->h)) + 1);
 
     glBindTexture(GL_TEXTURE_2D, *texture);
 
@@ -38,8 +38,8 @@ std::unique_ptr<Texture> Texture::loadImage2D(const std::string &path) {
     return texture;
 }
 
-std::shared_ptr<Texture> Texture::texture2D(GLuint w, GLuint h, GLenum internalFormat) {
-    auto rt = std::make_shared<Texture>();
+shared_ptr<Texture> Texture::texture2D(GLuint w, GLuint h, GLenum internalFormat) {
+    auto rt = make_shared<Texture>();
 
     glBindTexture(GL_TEXTURE_2D, *rt);
 

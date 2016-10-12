@@ -2,6 +2,7 @@
 #define ABSTRACTINPUT_H
 
 #include <SDL2/SDL.h>
+using namespace std;
 
 class AbstractInput
 {

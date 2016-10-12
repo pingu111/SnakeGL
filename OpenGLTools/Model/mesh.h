@@ -16,8 +16,8 @@ struct Mesh
 {
     Mesh(aiMesh const *mesh);
 
-    std::vector<Vertex> vertices;
-    std::vector<GLuint> indices;
+   std::vector<Vertex> vertices;
+   std::vector<GLuint> indices;
     unsigned materialIndex;
 };
 

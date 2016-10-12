@@ -1,6 +1,5 @@
 #include "program.h"
 #include <string>
-#include <stdexcept>
 
 Program::Program()
 {
@@ -22,7 +21,7 @@ void Program::link() {
         glGetProgramiv(mId, GL_INFO_LOG_LENGTH, &statLink);
         std::string log(statLink, 0);
         glGetProgramInfoLog(mId, statLink, &statLink, &log[0]);
-        throw std::runtime_error(log);
+        throw runtime_error(log);
     }
 }
 

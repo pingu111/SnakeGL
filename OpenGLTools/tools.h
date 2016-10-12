@@ -3,6 +3,8 @@
 
 #include <GL/glew.h>
 
+using namespace std;
+
 struct NonCopyable {
 public:
     NonCopyable() = default;

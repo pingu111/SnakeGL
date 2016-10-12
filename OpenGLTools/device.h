@@ -16,7 +16,7 @@ public:
            int major = 3, int minor = 0,
            bool debug = false);
 
-    void assignInput(std::shared_ptr<AbstractInput> input);
+    void assignInput(shared_ptr<AbstractInput> input);
     bool updateInputs();
 
     int width() const;
@@ -30,9 +30,9 @@ public:
     ~Device();
 
 private:
-    std::unique_ptr<ContextInitializer> mContextInitializer;
+    unique_ptr<ContextInitializer> mContextInitializer;
     std::string mWindowName;
-    std::vector<std::shared_ptr<AbstractInput>> mInputs;
+	std::vector<shared_ptr<AbstractInput>> mInputs;
     int mWidth;
     int mHeight;
     SDL_Window *mMainWindow;

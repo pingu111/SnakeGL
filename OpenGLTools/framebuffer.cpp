@@ -23,7 +23,7 @@ Framebuffer::Framebuffer()
     glGenFramebuffers(1, &mId);
 }
 
-void Framebuffer::addColorRenderTarget(std::shared_ptr<Texture> const &colorBuffer) {
+void Framebuffer::addColorRenderTarget(shared_ptr<Texture> const &colorBuffer) {
     glBindFramebuffer(GL_DRAW_FRAMEBUFFER, mId);
     glFramebufferTexture(GL_DRAW_FRAMEBUFFER, GL_COLOR_ATTACHMENT0 + mColorBuffers.size(),
                          *colorBuffer, 0);
@@ -34,7 +34,7 @@ void Framebuffer::addColorRenderTarget(std::shared_ptr<Texture> const &colorBuff
     glBindFramebuffer(GL_DRAW_FRAMEBUFFER, 0);
 }
 
-void Framebuffer::changeDepthBuffer(std::shared_ptr<Texture> const &depthBuffer) {
+void Framebuffer::changeDepthBuffer(shared_ptr<Texture> const &depthBuffer) {
     glBindFramebuffer(GL_DRAW_FRAMEBUFFER, mId);
     glFramebufferTexture(GL_DRAW_FRAMEBUFFER, GL_DEPTH_ATTACHMENT,
                          *depthBuffer, 0);
@@ -44,7 +44,7 @@ void Framebuffer::changeDepthBuffer(std::shared_ptr<Texture> const &depthBuffer)
     glBindFramebuffer(GL_DRAW_FRAMEBUFFER, 0);
 }
 
-GLuint Framebuffer::nameColor(std::size_t i) {
+GLuint Framebuffer::nameColor(size_t i) {
     return *mColorBuffers[i];
 }
 

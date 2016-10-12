@@ -3,7 +3,8 @@
 
 Material::Material(aiMaterial *mtl, TextureRepository &textureManager,
                    const std::string &globalPath) {
-    aiString texPath;
+	
+	aiString texPath;
     if(mtl->GetTexture(aiTextureType_DIFFUSE, 0, &texPath) == AI_SUCCESS) {
         std::string path = texPath.C_Str();
 

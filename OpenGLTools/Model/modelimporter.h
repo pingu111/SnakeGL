@@ -1,9 +1,11 @@
 #ifndef MODELIMPORTER_H
 #define MODELIMPORTER_H
 
-#include <string>
+#include <vector>
+
 #include "mesh.h"
 #include "material.h"
+
 
 struct ModelImporter
 {

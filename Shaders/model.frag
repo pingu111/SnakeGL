@@ -1,18 +1,21 @@
 #version 330
 
-in vec2 uv;
+// Données entrantes depuis le vertex shader
+in vec3 normal;
+in vec2 textureCoordinate;
 
+// Données uniform
+uniform sampler2D diffuseTexture;
+uniform vec3 diffuseColor;
 uniform int useTexture;
-uniform vec3 color;
-uniform sampler2D tex;
 
 layout(location = 0) out vec3 outColor;
 
 void main(void)
 {
-    if(useTexture == 1)
-        outColor = texture(tex, uv).rgb;
+	if(useTexture == 1)
+		outColor = texture(diffuseTexture, textureCoordinate).rgb;
 
-    else
-        outColor = color;
+	else
+		outColor = diffuseColor;
 }

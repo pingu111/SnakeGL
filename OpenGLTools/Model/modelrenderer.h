@@ -14,9 +14,9 @@ public:
 
 private:
     ModelImporter mModelImporter;
-    std::vector<GLuint> mVaos;
-    std::vector<GLuint> mVbos;
-    std::vector<GLuint> mIbos;
+   std::vector<GLuint> mVaos;
+   std::vector<GLuint> mVbos;
+   std::vector<GLuint> mIbos;
 
     void configureVbo();
     void configureIbo();

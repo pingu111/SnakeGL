@@ -7,12 +7,12 @@
 
 void callback(GLenum, GLenum, GLuint, GLenum,
               GLsizei, GLchar const *message, void const*) {
-    std::cerr << message << std::endl;
+    cerr << message << endl;
 }
 
 Device::Device(int width, int height, std::string name, int major, int minor, bool debug) :
-    mContextInitializer(std::make_unique<ContextInitializer>(major, minor, debug)),
-    mWindowName(std::move(name)) {
+    mContextInitializer(make_unique<ContextInitializer>(major, minor, debug)),
+    mWindowName(move(name)) {
 
     mMainWindow = SDL_CreateWindow(mWindowName.c_str(),
                                    SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
@@ -20,7 +20,7 @@ Device::Device(int width, int height, std::string name, int major, int minor, bo
                                    SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN);
 
     if(mMainWindow == nullptr)
-        throw std::runtime_error(std::string("Unable to create window : ") + SDL_GetError());
+        throw runtime_error(std::string("Unable to create window : ") + SDL_GetError());
 
     mContext = SDL_GL_CreateContext(mMainWindow);
 
@@ -39,8 +39,8 @@ Device::Device(int width, int height, std::string name, int major, int minor, bo
     mHeight = height;
 }
 
-void Device::assignInput(std::shared_ptr<AbstractInput> input) {
-    mInputs.emplace_back(std::move(input));
+void Device::assignInput(shared_ptr<AbstractInput> input) {
+    mInputs.emplace_back(move(input));
 }
 
 void Device::swapBuffers() {

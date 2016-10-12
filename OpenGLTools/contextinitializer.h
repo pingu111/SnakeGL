@@ -1,5 +1,6 @@
 #ifndef CONTEXTINITIALIZER_H
 #define CONTEXTINITIALIZER_H
+using namespace std;
 
 
 class ContextInitializer

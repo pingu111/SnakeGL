@@ -4,7 +4,7 @@
 #include <assimp/material.h>
 #include "../glm.h"
 #include "../texturerepository.h"
-
+#include <GL/glew.h>
 struct Material {
     Material(aiMaterial *mtl, TextureRepository &tr, std::string const &globalPath);
 
