@@ -1,3 +1,7 @@
 ﻿  main.cpp
+  camera.cpp
+d:\theo\boulot\snakegl\camera.cpp(21): warning C4244: 'initialisation' : conversion de 'double' en 'float', perte possible de données
+d:\theo\boulot\snakegl\camera.cpp(22): warning C4244: 'initialisation' : conversion de 'double' en 'float', perte possible de données
+  Génération de code en cours...
   4 Camera.vcxproj -> D:\Theo\Boulot\SnakeGL\Debug\SnakeGL.exe
   4 Camera.vcxproj -> D:\Theo\Boulot\SnakeGL\Debug\SnakeGL.pdb (Full PDB)

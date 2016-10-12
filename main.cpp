@@ -26,7 +26,7 @@ int main(int argc, char *argv[])
     TextureRepository textureRepository;
     ShaderRepository shaderRepository;
 
-    ModelRenderer sponza("../Models/Sponza/sponza.obj", textureRepository);
+	ModelRenderer cube("../Models/CubeBasic.obj", textureRepository);
 
     Program modelProgram;
 
@@ -54,15 +54,17 @@ int main(int argc, char *argv[])
 
     glEnable(GL_DEPTH_TEST);
 
-    CameraFPS camera(glm::vec3(700, 1000, 1), 5, 1, mouseInput, keyboardInput);
+  //  CameraFPS camera(glm::vec3(700, 1000, 1), 5, 1, mouseInput, keyboardInput);
+    CameraFPS camera(glm::vec3(1, 1, 1), 1, 1, mouseInput, keyboardInput);
 
     device.hideCursor();
 
-    while(windowInput->isRunning()) {
+    while(windowInput->isRunning()) 
+	{
         if(!device.updateInputs())
             mouseInput->resetRelative();
 
-        camera.update();
+		camera.update();
 
         view = camera.view();
 
@@ -70,8 +72,7 @@ int main(int argc, char *argv[])
         glUseProgram(modelProgram);
         glUniformMatrix4fv(viewLocation, 1, false, glm::value_ptr(view));
 
-        sponza.draw(true, colorLocation, useTextureLocation);
-
+        cube.draw(true, colorLocation);
         device.swapBuffers();
 
 		if (keyboardInput->key(SDL_SCANCODE_ESCAPE))
