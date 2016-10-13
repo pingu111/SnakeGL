@@ -21,22 +21,25 @@ using namespace std;
 #define PROJ 2
 
 
-
 int main(int argc, char *argv[])
 {
+	/********************** INIT **********************/
+
 	/* Initialisation du Contexte OpenGL en version 3.3 */
-    Device device(800, 600, "SnakeGL", 3, 3, true);
+	Device device(800, 600, "SnakeGL", 3, 3, true);
 
 	// Ajout de la gestion des événements
-    auto windowInput(make_shared<WindowInput>());
+	auto windowInput(make_shared<WindowInput>());
 	auto mouseInput(make_shared<MouseInput>());
 	auto keyboardInput(make_shared<KeyboardInput>());
-    device.assignInput(windowInput);
+	device.assignInput(windowInput);
 	device.assignInput(mouseInput);
 	device.assignInput(keyboardInput);
 
 	// On cache le curseur et on l'emprisonne dans la fenêtre.
 	device.hideCursor();
+
+
 
 	// Classes permettant de gérer les shaders et programs
 	ShaderRepository sR;
@@ -48,18 +51,15 @@ int main(int argc, char *argv[])
 
 	vector<CubeRenderer> listCubes;
 	
-	ModelRenderer modelRenderer1;
-	unique_ptr<ModelRenderer> modelRenderer2;
-
 
 	//for (int i = 0; i < 10; i++)
 //	{
 		CubeRenderer cube("../Models/CubeBasic.obj", &textureRepository, &modelProgram, &sR);
 		listCubes.push_back(cube);
+		ModelRenderer modelRenderer2 = ModelRenderer(*listCubes[0].getCubeModel());
 
 	//}
-	modelRenderer2 = std::make_unique<ModelRenderer>("../Models/CubeBasic.obj", textureRepository2);
-
+	unique_ptr<ModelRenderer> modelRenderer1 = std::make_unique<ModelRenderer>("../Models/CubeBasic.obj", textureRepository2);
 
 	// On récupère les différentes locations correpondant aux variables uniforms des shaders model.vert/frag
 	int locationMatrices = glGetUniformLocation(modelProgram, "matrices");
@@ -80,18 +80,13 @@ int main(int argc, char *argv[])
 	glm::mat4 matrices[3];
 
 
-
-	modelRenderer1 = (*cube.getCubeModel());
-
-    while(windowInput->isRunning()) 
+	while (windowInput->isRunning())
 	{
-
 		if (!device.updateInputs())
 			mouseInput->resetRelative();
 		// Echap = quit
 		if (keyboardInput->key(SDL_SCANCODE_ESCAPE))
 			return 0;
-
 
 		// On update la caméra
 		camera.update();
@@ -104,7 +99,6 @@ int main(int argc, char *argv[])
 
 		for (int i = 0; i < listCubes.size(); i++)
 		{
-
 			/* Matrice Modèle
 				Peut contenir les transformations comme :
 					- Les translations
@@ -126,10 +120,9 @@ int main(int argc, char *argv[])
 			/* On dessine l'objet en prenant compte les matériaux,
 			   La classe attends la location des variables diffuseColor (un vec3)
 														 et useTexture (unt int) */
+			listCubes[i].setMatrices(matrices);
 
-
-
-			modelRenderer1.draw(true, locationDiffuseColor, locationUseTexture);
+			modelRenderer2.draw(true, locationDiffuseColor, locationUseTexture);
 
 			device.swapBuffers();
 		}

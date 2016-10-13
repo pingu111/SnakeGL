@@ -21,17 +21,10 @@ ModelRenderer* CubeRenderer::getCubeModel()
 	return &modelRenderer;
 }
 
-ModelRenderer* CubeRenderer::getCubeModel(ModelRenderer model)
+void CubeRenderer::setMatrices(glm::mat4 _matrices[])
 {
-	return &model;
-}
-
-void CubeRenderer::setMatrices(glm::mat4 _matrices[3])
-{
-	//matrices = glm::mat4[_matrices->length()];
 	for (int i = 0; i < _matrices->length(); i++)
 	{
-		std::cout << i << endl;
 		matrices[i] = _matrices[i];
 	}
 }

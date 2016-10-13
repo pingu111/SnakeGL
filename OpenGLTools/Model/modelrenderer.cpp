@@ -17,6 +17,7 @@ ModelRenderer::ModelRenderer(const std::string &path, TextureRepository &texture
 
 void ModelRenderer::draw(bool takeCareAboutMaterials, GLint colorLocation, GLint useTextureLocation) {
     for(int i = 0; i < mVaos.size(); ++i) {
+	
         glBindVertexArray(mVaos[i]);
 
         if(takeCareAboutMaterials) {

@@ -3,12 +3,16 @@
 
 class CubeRenderer
 {
+	static const int maxSize = 100;
+
 	private :
+
+
 		/// The ptr to the model of the cube
 		ModelRenderer modelRenderer;
 
 		/// The position etc matrix
-		glm::mat4 matrices[3];
+		glm::mat4 matrices[maxSize];
 
 	public:
 
@@ -19,13 +23,10 @@ class CubeRenderer
 		~CubeRenderer();
 
 		/// Set the matrix for this cube
-		void setMatrices(glm::mat4 matrices[3]);
+		void setMatrices(glm::mat4 matrices[]);
 
 		/// Get the cube to render
 		ModelRenderer* getCubeModel();
-
-		ModelRenderer * getCubeModel(ModelRenderer model);
-
 };
 
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    

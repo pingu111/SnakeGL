@@ -3,6 +3,7 @@
 #include <assimp/Importer.hpp>
 #include <assimp/scene.h>
 #include <assimp/postprocess.h>
+#include <iostream>
 
 ModelImporter::ModelImporter()
 {
@@ -33,4 +34,6 @@ ModelImporter::ModelImporter(const std::string &path, TextureRepository &texMana
 
     for(unsigned i = 0; i < scene->mNumMaterials; ++i)
         materials.emplace_back(scene->mMaterials[i], texManager, globalPath);
+
+	std::cout << "ModelImporter Declared " << &imp << endl;
 }
