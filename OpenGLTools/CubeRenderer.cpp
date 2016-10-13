@@ -7,11 +7,12 @@
 #include "CubeRenderer.h"
 
 
-CubeRenderer::CubeRenderer(string path, TextureRepository *textureRepository, Program *modelProgram, ShaderRepository *sR) : modelRenderer(path, *textureRepository)
+CubeRenderer::CubeRenderer(string path, TextureRepository *textureRepository, Program *modelProgram, ShaderRepository *sR) 
 {
 	modelProgram->attach(sR->shader("../Shaders/model.vert", GL_VERTEX_SHADER));
 	modelProgram->attach(sR->shader("../Shaders/model.frag", GL_FRAGMENT_SHADER));
 	modelProgram->link();
+	modelRenderer = ModelRenderer(path, *textureRepository);
 }
 
 ModelRenderer CubeRenderer::getCubeModel()

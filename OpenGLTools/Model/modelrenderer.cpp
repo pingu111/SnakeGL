@@ -1,5 +1,9 @@
 #include "modelrenderer.h"
 
+ModelRenderer::ModelRenderer()
+{
+}
+
 ModelRenderer::ModelRenderer(const std::string &path, TextureRepository &textureRepository) :
     mModelImporter(path, textureRepository),
     mVaos(mModelImporter.meshes.size(), 0),

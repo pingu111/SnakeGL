@@ -7,6 +7,8 @@ class ModelRenderer
 {
 public:
 
+	ModelRenderer();
+
     ModelRenderer(std::string const &path, TextureRepository &textureRepository);
 
     void draw(bool takeCareAboutMaterials, GLint colorLocation = 0, GLint useTextureLocation = 0);

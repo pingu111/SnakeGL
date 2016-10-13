@@ -9,6 +9,7 @@
 
 struct ModelImporter
 {
+	ModelImporter();
     ModelImporter(std::string const &path, TextureRepository &textureRepository);
     ~ModelImporter() = default;
 

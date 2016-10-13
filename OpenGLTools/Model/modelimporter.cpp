@@ -4,6 +4,10 @@
 #include <assimp/scene.h>
 #include <assimp/postprocess.h>
 
+ModelImporter::ModelImporter()
+{
+}
+
 ModelImporter::ModelImporter(const std::string &path, TextureRepository &texManager) {
     Assimp::Importer imp;
 

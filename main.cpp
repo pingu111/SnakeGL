@@ -63,9 +63,11 @@ int main(int argc, char *argv[])
 	{
 		cerr << exception.what() << endl;
 	}*/
-	CubeRenderer cube("../Models/CubeBasic.obj", &textureRepository, &modelProgram, &sR);
-	modelRenderer = std::make_unique<ModelRenderer>("../Models/CubeBasic.obj", textureRepository);
 
+
+	CubeRenderer cube("../Models/CubeBasic.obj", &textureRepository, &modelProgram, &sR);
+	//modelRenderer = std::make_unique<ModelRenderer>(cube.getCubeModel());
+	modelRenderer = std::make_unique<ModelRenderer>("../Models/CubeBasic.obj", textureRepository);
 
 
 	// On récupère les différentes locations correpondant aux variables uniforms des shaders model.vert/frag
@@ -104,8 +106,6 @@ int main(int argc, char *argv[])
 		// Efface l'écran et le depth buffer
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-	
-
 		// On utilise le modelProgram qui va nous servir pour le rendu de notre modèle3D
 		glUseProgram(modelProgram);
 
@@ -135,24 +135,11 @@ int main(int argc, char *argv[])
 														 et useTexture (unt int) */
 
 
-			//listCubes[i].setMatrices(matrices);
-			//CubeRenderer cube("../Models/CubeBasic.obj", &textureRepository, &modelProgram, &sR);
-
-			/*ModelRenderer modelRenderer("../Models/CubeBasic.obj", textureRepository);
-			modelProgram.attach(sR.shader("../Shaders/model.vert", GL_VERTEX_SHADER));
-			modelProgram.attach(sR.shader("../Shaders/model.frag", GL_FRAGMENT_SHADER));
-			modelProgram.link();
-			std::cout << &modelRenderer << endl;
-			
-			modelRenderer.draw(true, locationDiffuseColor, locationUseTexture);*/
-
 	
 			modelRenderer->draw(true, locationDiffuseColor, locationUseTexture);
 
 			device.swapBuffers();
-
 		}
-
     }
 
     return 0;
