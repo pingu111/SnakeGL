@@ -22,7 +22,9 @@ class CubeRenderer
 		void setMatrices(glm::mat4 matrices[3]);
 
 		/// Get the cube to render
-		ModelRenderer getCubeModel();
+		ModelRenderer* getCubeModel();
+
+		ModelRenderer * getCubeModel(ModelRenderer model);
 
 };
 

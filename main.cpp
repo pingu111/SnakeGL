@@ -44,30 +44,21 @@ int main(int argc, char *argv[])
 
 	// Classe permettant de charger les textures
 	TextureRepository textureRepository;
+	TextureRepository textureRepository2;
 
 	vector<CubeRenderer> listCubes;
 	
-	unique_ptr<ModelRenderer> modelRenderer;
-
-	/*try
-	{
-		for (int i = 0; i < 10; i++)
-		{
-			CubeRenderer cube("../Models/CubeBasic.obj", &textureRepository, &modelProgram, &sR);
-			listCubes.push_back(cube);
-			modelRenderer = std::make_unique<ModelRenderer>("../Models/CubeBasic.obj", textureRepository);
-
-		}
-	}
-	catch (runtime_error const &exception)
-	{
-		cerr << exception.what() << endl;
-	}*/
+	ModelRenderer modelRenderer1;
+	unique_ptr<ModelRenderer> modelRenderer2;
 
 
-	CubeRenderer cube("../Models/CubeBasic.obj", &textureRepository, &modelProgram, &sR);
-	//modelRenderer = std::make_unique<ModelRenderer>(cube.getCubeModel());
-	modelRenderer = std::make_unique<ModelRenderer>("../Models/CubeBasic.obj", textureRepository);
+	//for (int i = 0; i < 10; i++)
+//	{
+		CubeRenderer cube("../Models/CubeBasic.obj", &textureRepository, &modelProgram, &sR);
+		listCubes.push_back(cube);
+
+	//}
+	modelRenderer2 = std::make_unique<ModelRenderer>("../Models/CubeBasic.obj", textureRepository2);
 
 
 	// On récupère les différentes locations correpondant aux variables uniforms des shaders model.vert/frag
@@ -86,13 +77,15 @@ int main(int argc, char *argv[])
 	// On crée notre caméra
 	CameraFPS camera(glm::vec3(1, 1, 1), 1.0f, 1.f, mouseInput, keyboardInput);
 
-
 	glm::mat4 matrices[3];
 
 
 
+	modelRenderer1 = (*cube.getCubeModel());
+
     while(windowInput->isRunning()) 
 	{
+
 		if (!device.updateInputs())
 			mouseInput->resetRelative();
 		// Echap = quit
@@ -109,9 +102,9 @@ int main(int argc, char *argv[])
 		// On utilise le modelProgram qui va nous servir pour le rendu de notre modèle3D
 		glUseProgram(modelProgram);
 
-		//for (int i = 0; i < listCubes.size(); i++)
+		for (int i = 0; i < listCubes.size(); i++)
 		{
-	
+
 			/* Matrice Modèle
 				Peut contenir les transformations comme :
 					- Les translations
@@ -135,8 +128,8 @@ int main(int argc, char *argv[])
 														 et useTexture (unt int) */
 
 
-	
-			modelRenderer->draw(true, locationDiffuseColor, locationUseTexture);
+
+			modelRenderer1.draw(true, locationDiffuseColor, locationUseTexture);
 
 			device.swapBuffers();
 		}

@@ -15,14 +15,21 @@ CubeRenderer::CubeRenderer(string path, TextureRepository *textureRepository, Pr
 	modelRenderer = ModelRenderer(path, *textureRepository);
 }
 
-ModelRenderer CubeRenderer::getCubeModel()
+ModelRenderer* CubeRenderer::getCubeModel()
 {
-	return modelRenderer;
+	cout << &modelRenderer << endl;
+	return &modelRenderer;
+}
+
+ModelRenderer* CubeRenderer::getCubeModel(ModelRenderer model)
+{
+	return &model;
 }
 
 void CubeRenderer::setMatrices(glm::mat4 _matrices[3])
 {
-	for (int i = 0; i < matrices->length(); i++)
+	//matrices = glm::mat4[_matrices->length()];
+	for (int i = 0; i < _matrices->length(); i++)
 	{
 		std::cout << i << endl;
 		matrices[i] = _matrices[i];

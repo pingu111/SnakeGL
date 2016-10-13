@@ -8,7 +8,8 @@ ModelRenderer::ModelRenderer(const std::string &path, TextureRepository &texture
     mModelImporter(path, textureRepository),
     mVaos(mModelImporter.meshes.size(), 0),
     mVbos(mModelImporter.meshes.size(), 0),
-    mIbos(mModelImporter.meshes.size(), 0) {
+    mIbos(mModelImporter.meshes.size(), 0)
+{
     configureVbo();
     configureIbo();
     configureVao();
