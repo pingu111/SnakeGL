@@ -16,7 +16,6 @@ CubeRenderer::CubeRenderer(string path, TextureRepository *textureRepository, Pr
 
 ModelRenderer CubeRenderer::getCubeModel()
 {
-	std::cout << &modelRenderer << endl;
 	return modelRenderer;
 }
 

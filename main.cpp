@@ -46,30 +46,27 @@ int main(int argc, char *argv[])
 	TextureRepository textureRepository;
 
 	vector<CubeRenderer> listCubes;
-	/*
-	// On test les erreurs
-	for (int i = 0; i < 2; i++)
-	{
-		CubeRenderer cube("../Models/CubeBasic.obj", &textureRepository, &modelProgram, &sR);
-		try
-		{
-			unique_ptr<ModelRenderer> modelRenderer;
+	
+	unique_ptr<ModelRenderer> modelRenderer;
 
-			// On tente d'ouvrir un modèle 3D (ici Sponza atrium)
-			modelRenderer = cube.getCube();
-			listModelRenderer.push_back(move(modelRenderer));
-		}
-
-		catch (runtime_error const &exception) 
-		{
-			cerr << exception.what() << endl;
-		}
-	}*/
-	for (int i = 0; i < 10; i++)
+	/*try
 	{
-		CubeRenderer cube("../Models/CubeBasic.obj", &textureRepository, &modelProgram, &sR);
-		listCubes.push_back(cube);
+		for (int i = 0; i < 10; i++)
+		{
+			CubeRenderer cube("../Models/CubeBasic.obj", &textureRepository, &modelProgram, &sR);
+			listCubes.push_back(cube);
+			modelRenderer = std::make_unique<ModelRenderer>("../Models/CubeBasic.obj", textureRepository);
+
+		}
 	}
+	catch (runtime_error const &exception)
+	{
+		cerr << exception.what() << endl;
+	}*/
+	CubeRenderer cube("../Models/CubeBasic.obj", &textureRepository, &modelProgram, &sR);
+	modelRenderer = std::make_unique<ModelRenderer>("../Models/CubeBasic.obj", textureRepository);
+
+
 
 	// On récupère les différentes locations correpondant aux variables uniforms des shaders model.vert/frag
 	int locationMatrices = glGetUniformLocation(modelProgram, "matrices");
@@ -85,10 +82,12 @@ int main(int argc, char *argv[])
 	glEnable(GL_DEPTH_TEST); // On active le test de profondeur
 
 	// On crée notre caméra
-	CameraFPS camera(glm::vec3(1, 1, 1), 2.0f, 1.f, mouseInput, keyboardInput);
+	CameraFPS camera(glm::vec3(1, 1, 1), 1.0f, 1.f, mouseInput, keyboardInput);
 
 
 	glm::mat4 matrices[3];
+
+
 
     while(windowInput->isRunning()) 
 	{
@@ -110,7 +109,7 @@ int main(int argc, char *argv[])
 		// On utilise le modelProgram qui va nous servir pour le rendu de notre modèle3D
 		glUseProgram(modelProgram);
 
-		for (int i = 0; i < listCubes.size(); i++)
+		//for (int i = 0; i < listCubes.size(); i++)
 		{
 	
 			/* Matrice Modèle
@@ -137,14 +136,23 @@ int main(int argc, char *argv[])
 
 
 			//listCubes[i].setMatrices(matrices);
-			ModelRenderer modelRenderer = listCubes[i].getCubeModel();
-			std::cout << &modelRenderer << endl;
-			std::cout << glm::value_ptr(matrices[0]) << endl;
+			//CubeRenderer cube("../Models/CubeBasic.obj", &textureRepository, &modelProgram, &sR);
 
-			modelRenderer.draw(true, locationDiffuseColor, locationUseTexture);
+			/*ModelRenderer modelRenderer("../Models/CubeBasic.obj", textureRepository);
+			modelProgram.attach(sR.shader("../Shaders/model.vert", GL_VERTEX_SHADER));
+			modelProgram.attach(sR.shader("../Shaders/model.frag", GL_FRAGMENT_SHADER));
+			modelProgram.link();
+			std::cout << &modelRenderer << endl;
+			
+			modelRenderer.draw(true, locationDiffuseColor, locationUseTexture);*/
+
+	
+			modelRenderer->draw(true, locationDiffuseColor, locationUseTexture);
+
+			device.swapBuffers();
+
 		}
 
-        device.swapBuffers();
     }
 
     return 0;

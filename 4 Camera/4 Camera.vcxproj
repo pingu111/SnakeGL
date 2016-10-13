@@ -71,6 +71,7 @@
     <ClCompile Include="..\camera.cpp" />
     <ClCompile Include="..\main.cpp" />
     <ClCompile Include="..\OpenGLTools\contextinitializer.cpp" />
+    <ClCompile Include="..\OpenGLTools\CubeRenderer.cpp" />
     <ClCompile Include="..\OpenGLTools\device.cpp" />
     <ClCompile Include="..\OpenGLTools\framebuffer.cpp" />
     <ClCompile Include="..\OpenGLTools\Input\keyboardinput.cpp" />
@@ -89,6 +90,7 @@
   <ItemGroup>
     <ClInclude Include="..\camera.h" />
     <ClInclude Include="..\OpenGLTools\contextinitializer.h" />
+    <ClInclude Include="..\OpenGLTools\CubeRenderer.h" />
     <ClInclude Include="..\OpenGLTools\device.h" />
     <ClInclude Include="..\OpenGLTools\framebuffer.h" />
     <ClInclude Include="..\OpenGLTools\glm.h" />
