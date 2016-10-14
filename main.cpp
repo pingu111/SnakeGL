@@ -47,7 +47,7 @@ int main(int argc, char *argv[])
 
 	// Classe permettant de charger les textures
 	TextureRepository textureRepository;
-	TextureRepository textureRepository2;
+	TextureRepository yoloRepositorydemerde;
 
 	vector<CubeRenderer> listCubes;
 	
@@ -59,7 +59,7 @@ int main(int argc, char *argv[])
 		ModelRenderer modelRenderer2 = ModelRenderer(*listCubes[0].getCubeModel());
 
 	//}
-	unique_ptr<ModelRenderer> modelRenderer1 = std::make_unique<ModelRenderer>("../Models/CubeBasic.obj", textureRepository2);
+	unique_ptr<ModelRenderer> yolo = std::make_unique<ModelRenderer>("../Models/CubeBasic.obj", yoloRepositorydemerde);
 
 	// On récupère les différentes locations correpondant aux variables uniforms des shaders model.vert/frag
 	int locationMatrices = glGetUniformLocation(modelProgram, "matrices");
@@ -84,6 +84,7 @@ int main(int argc, char *argv[])
 	{
 		if (!device.updateInputs())
 			mouseInput->resetRelative();
+
 		// Echap = quit
 		if (keyboardInput->key(SDL_SCANCODE_ESCAPE))
 			return 0;
@@ -123,6 +124,7 @@ int main(int argc, char *argv[])
 			listCubes[i].setMatrices(matrices);
 
 			modelRenderer2.draw(true, locationDiffuseColor, locationUseTexture);
+			std::cout << "lol" << endl;
 
 			device.swapBuffers();
 		}
