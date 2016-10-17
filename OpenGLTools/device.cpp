@@ -7,12 +7,12 @@
 
 void callback(GLenum, GLenum, GLuint, GLenum,
               GLsizei, GLchar const *message, void const*) {
-    cerr << message << endl;
+    std::cerr << message << std::endl;
 }
 
 Device::Device(int width, int height, std::string name, int major, int minor, bool debug) :
-    mContextInitializer(make_unique<ContextInitializer>(major, minor, debug)),
-    mWindowName(move(name)) {
+    mContextInitializer(std::make_unique<ContextInitializer>(major, minor, debug)),
+    mWindowName(std::move(name)) {
 
     mMainWindow = SDL_CreateWindow(mWindowName.c_str(),
                                    SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
@@ -20,7 +20,7 @@ Device::Device(int width, int height, std::string name, int major, int minor, bo
                                    SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN);
 
     if(mMainWindow == nullptr)
-        throw runtime_error(std::string("Unable to create window : ") + SDL_GetError());
+        throw std::runtime_error(std::string("Unable to create window : ") + SDL_GetError());
 
     mContext = SDL_GL_CreateContext(mMainWindow);
 
@@ -31,16 +31,16 @@ Device::Device(int width, int height, std::string name, int major, int minor, bo
 
     if(debug) {
         glEnable(GL_DEBUG_OUTPUT_SYNCHRONOUS);
-       // glDebugMessageCallback(callback, nullptr);
-       // glDebugMessageControl(GL_DONT_CARE, GL_DONT_CARE, GL_DONT_CARE, 0, nullptr, true);
+        glDebugMessageCallback((GLDEBUGPROC)callback, nullptr);
+        glDebugMessageControl(GL_DONT_CARE, GL_DONT_CARE, GL_DONT_CARE, 0, nullptr, true);
     }
 
     mWidth = width;
     mHeight = height;
 }
 
-void Device::assignInput(shared_ptr<AbstractInput> input) {
-    mInputs.emplace_back(move(input));
+void Device::assignInput(std::shared_ptr<AbstractInput> input) {
+    mInputs.emplace_back(std::move(input));
 }
 
 void Device::swapBuffers() {

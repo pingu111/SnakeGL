@@ -3,6 +3,7 @@
 using namespace glm;
 
 Mesh::Mesh(aiMesh const *mesh) {
+	// Pour chaque vertices
     for(unsigned i(0); i < mesh->mNumVertices; ++i) {
         Vertex v;
 
@@ -15,6 +16,7 @@ Mesh::Mesh(aiMesh const *mesh) {
         vertices.emplace_back(v);
     }
 
+	// Pour chaques faces
     for(unsigned i = 0; i < mesh->mNumFaces; ++i)
         for(unsigned j = 0; j < 3; ++j)
             indices.emplace_back(mesh->mFaces[i].mIndices[j]);

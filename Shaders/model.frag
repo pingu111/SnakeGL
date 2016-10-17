@@ -1,7 +1,6 @@
 #version 330
 
 // Données entrantes depuis le vertex shader
-in vec3 normal;
 in vec2 textureCoordinate;
 
 // Données uniform

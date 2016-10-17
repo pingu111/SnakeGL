@@ -32,7 +32,7 @@ public:
     void resetRelative();
 
 private:
-    array<bool, 8> mButtons;
+    std::array<bool, 8> mButtons;
     int mX, mY, mXRel, mYRel;
 
     void update(SDL_Event &event);

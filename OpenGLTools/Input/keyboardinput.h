@@ -13,7 +13,7 @@ public:
         return mKeys[key];
     }
 private:
-    array<bool, SDL_NUM_SCANCODES> mKeys;
+    std::array<bool, SDL_NUM_SCANCODES> mKeys;
 
     void update(SDL_Event &event);
 };

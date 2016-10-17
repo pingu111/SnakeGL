@@ -9,14 +9,14 @@ Shader::Shader(const std::string &path, GLenum type) {
 }
 
 std::string Shader::getSource(const std::string &path) {
-    ifstream stream(path, ios::binary);
+    std::ifstream stream(path, std::ios::binary);
 
     if(!stream.is_open())
-        throw runtime_error(path + " does not opened");
+        throw std::runtime_error(path + " does not opened");
 
-    stream.seekg(0, ios::end);
+    stream.seekg(0, std::ios::end);
     auto length = stream.tellg();
-    stream.seekg(0, ios::beg);
+    stream.seekg(0, std::ios::beg);
 
     std::string src(length, 0);
     stream.read(&src[0], length);
@@ -36,7 +36,7 @@ void Shader::compile(const std::string &src) {
         std::string log(statCompilation, 0);
         glGetShaderInfoLog(mId, statCompilation, &statCompilation, &log[0]);
         glDeleteShader(mId);
-        throw runtime_error(log);
+        throw std::runtime_error(log);
     }
 }
 

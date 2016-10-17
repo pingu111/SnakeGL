@@ -2,11 +2,9 @@
 
 // Données entrantes depuis le VAO
 layout(location = 0) in vec3 inPos;
-layout(location = 1) in vec3 inNormal;
 layout(location = 2) in vec2 inTextureCoordinate;
 
 // Données sortantes vers le Fragment Shader
-out vec3 normal;
 out vec2 textureCoordinate;
 
 // Définit le type de matrices
@@ -20,5 +18,4 @@ uniform mat4 matrices[3];
 void main(void) {
     gl_Position = matrices[PROJ] * matrices[VIEW] * matrices[WORLD] * vec4(inPos, 1);
     textureCoordinate = inTextureCoordinate;
-	normal = transpose(inverse(mat3(matrices[VIEW] * matrices[WORLD]))) * inNormal;
 }

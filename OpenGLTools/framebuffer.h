@@ -9,16 +9,16 @@ class Framebuffer : public GLResource
 public:
     Framebuffer();
 
-    void addColorRenderTarget(shared_ptr<Texture> const &colorBuffer);
-    void changeDepthBuffer(shared_ptr<Texture> const &depthBuffer);
+    void addColorRenderTarget(std::shared_ptr<Texture> const &colorBuffer);
+    void changeDepthBuffer(std::shared_ptr<Texture> const &depthBuffer);
 
-    GLuint nameColor(size_t i);
+    GLuint nameColor(std::size_t i);
     GLuint nameDepth();
 
     ~Framebuffer();
 private:
-   std::vector<shared_ptr<Texture>> mColorBuffers;
-    shared_ptr<Texture> mDepthBuffer;
+    std::vector<std::shared_ptr<Texture>> mColorBuffers;
+    std::shared_ptr<Texture> mDepthBuffer;
 };
 
 #endif // FRAMEBUFFER_H

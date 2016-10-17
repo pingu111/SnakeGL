@@ -1,15 +1,13 @@
 #ifndef MODELIMPORTER_H
 #define MODELIMPORTER_H
 
-#include <vector>
-
+#include <string>
 #include "mesh.h"
 #include "material.h"
 
-
+// Cette classe charge tous les mesh et matériaux dans les classes correspondantes
 struct ModelImporter
 {
-	ModelImporter();
     ModelImporter(std::string const &path, TextureRepository &textureRepository);
     ~ModelImporter() = default;
 

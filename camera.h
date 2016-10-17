@@ -28,6 +28,10 @@ public:
         return glm::lookAt(mPos, mLook, mUp);
     }
 
+	glm::vec3 position() const {
+		return mPos;
+	}
+
     virtual void update(void);
 
 protected:
@@ -38,14 +42,14 @@ protected:
     std::shared_ptr<KeyboardInput> mKeyboardInput;
     std::map<CameraKeyMap, SDL_Keycode> mKeyMap; //!< KeyMapping
 
-    glm::vec3 mForward, mLeft; //!<vector forward and left for deplacement
+    glm::vec3 mForward, mLeft; //!< vector forward and left for deplacement
 
     float mPhi, mTheta; //!< Angle for spherical coordinate
 
     float mSpeed, mSensitivity; //!< Variable for speed
 
     /**
-        * @brief Compute the forwardstd::vector
+        * @brief Compute the forward vector
         */
     void mComputeForwardVector(void);
 };
