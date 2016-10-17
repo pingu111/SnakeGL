@@ -25,10 +25,10 @@ void CameraFPS::mComputeForwardVector(void)
 
     float cPhi = cos(phiRad);
     float cTheta = cos(thetaRad);
-    float sPhi = sin(phiRad);
+   // float sPhi = sin(phiRad);
     float sTheta = sin(thetaRad);
 
-    mForward.y = sPhi;
+   // mForward.y = sPhi;
     mForward.z = cPhi * cTheta;
     mForward.x = cPhi * sTheta;
 }
@@ -36,7 +36,7 @@ void CameraFPS::mComputeForwardVector(void)
 void CameraFPS::update(void)
 {
     // Mouse
-    mPhi   -= mMouseInput->yRel() * mSensitivity;
+   // mPhi   -= mMouseInput->yRel() * mSensitivity;
     mTheta -= mMouseInput->xRel() * mSensitivity;
 
     if(mPhi > 89.0f)

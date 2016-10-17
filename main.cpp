@@ -47,13 +47,16 @@ int main(int argc, char *argv[])
 
 	// On charge la scène dans le loader
 	sceneLoader.load("../Models/map.png",
-	{ std::make_pair(0, SceneBlock::MUR), // couleur noir représente un mur
-	  std::make_pair(0xffffff, SceneBlock::SOL) }, // Couleur blanche représente le sol
-	1.f);
+	{
+		std::make_pair(0, SceneBlock::MUR), // couleur noir représente un mur
+		std::make_pair(0xffffff, SceneBlock::SOL) 
+	}, 1.f);
 
 	SceneDisplayer displayer(shaderRepository,
-	{ std::make_pair(SceneBlock::SOL, std::make_shared<ModelRenderer>("../Models/sol.obj", textureRepository)),
-	 std::make_pair(SceneBlock::MUR, std::make_shared<ModelRenderer>("../Models/mur.obj", textureRepository)) });
+	{
+		std::make_pair(SceneBlock::SOL, std::make_shared<ModelRenderer>("../Models/sol.obj", textureRepository)),
+		std::make_pair(SceneBlock::MUR, std::make_shared<ModelRenderer>("../Models/CubeBasic.obj", textureRepository))
+	});
 
 	auto scene = sceneLoader.load("../Models/map.png");
 
@@ -72,7 +75,8 @@ int main(int argc, char *argv[])
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 		// On l'affiche
-		displayer.draw(scene, camera.view(), glm::perspective(glm::radians(70.f), (float)device.width() / device.height(), 0.01f, 500.f));
+		glm::mat4 perspMatrix(glm::perspective(glm::radians(70.f), (float)device.width() / device.height(), 0.01f, 500.f));
+		displayer.draw(scene, camera.view(), perspMatrix);
 
         device.swapBuffers();
     }
