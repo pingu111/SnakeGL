@@ -11,4 +11,3 @@ void KeyboardInput::update(SDL_Event &event) {
     if(event.type == SDL_KEYUP)
         mKeys[event.key.keysym.scancode] = false;
 }
-

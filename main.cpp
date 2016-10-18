@@ -69,7 +69,7 @@ int main(int argc, char *argv[])
 			return 0;
 
 		// On update la caméra
-		camera.update();
+		camera.update(scene);
 
 		// Efface l'écran et le depth buffer
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);

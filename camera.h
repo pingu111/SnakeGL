@@ -6,6 +6,9 @@
 #include "OpenGLTools/Input/keyboardinput.h"
 #include "OpenGLTools/Input/mouseinput.h"
 #include "OpenGLTools/glm.h"
+#include "Scene\Scene.h"
+#include <iostream>
+
 
 enum CameraKeyMap{RIGHT, LEFT, FORWARD, BACKWARD};
 
@@ -32,7 +35,7 @@ public:
 		return mPos;
 	}
 
-    virtual void update(void);
+    virtual void update(Scene const &scene);
 
 protected:
     glm::vec3 mPos;
