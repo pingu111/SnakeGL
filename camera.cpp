@@ -38,7 +38,7 @@ void CameraFPS::update(Scene const &scene)
 	float threesholdMovementInWall = 1.0f;
 
     // Mouse
-   // mPhi   -= mMouseInput->yRel() * mSensitivity;
+  //  mPhi   -= mMouseInput->yRel() * mSensitivity;
     mTheta -= mMouseInput->xRel() * mSensitivity;
 
     if(mPhi > 89.0f)
@@ -57,18 +57,23 @@ void CameraFPS::update(Scene const &scene)
 
     // KeyBoard
 
-    if(mKeyboardInput->key(mKeyMap[FORWARD]) && (scene.get((mPos + threesholdMovementInWall* glm::vec3(mForward * mSpeed))) != SceneBlock::MUR))
+    if(mKeyboardInput->key(mKeyMap[FORWARD]) &&  (scene.get((mPos +  2.f*glm::vec3(mForward * mSpeed))) != SceneBlock::MUR))
         mPos += glm::vec3(mForward * mSpeed);
 
-    if(mKeyboardInput->key(mKeyMap[BACKWARD]) && (scene.get((mPos - threesholdMovementInWall*glm::vec3(mForward * mSpeed))) != SceneBlock::MUR))
+    if(mKeyboardInput->key(mKeyMap[BACKWARD]) && (scene.get((mPos - 2.f*glm::vec3(mForward * mSpeed))) != SceneBlock::MUR))
         mPos -= glm::vec3(mForward * mSpeed);
 
-    if(mKeyboardInput->key(mKeyMap[LEFT]) && (scene.get((mPos + threesholdMovementInWall* glm::vec3(mLeft * mSpeed))) != SceneBlock::MUR))
+    if(mKeyboardInput->key(mKeyMap[LEFT]) && (scene.get((mPos + 2.f* glm::vec3(mLeft * mSpeed))) != SceneBlock::MUR))
         mPos += glm::vec3(mLeft * mSpeed);
 
-    if(mKeyboardInput->key(mKeyMap[RIGHT]) && (scene.get((mPos - threesholdMovementInWall*glm::vec3(mLeft * mSpeed))) != SceneBlock::MUR))
+    if(mKeyboardInput->key(mKeyMap[RIGHT]) && (scene.get((mPos - 2.f*glm::vec3(mLeft * mSpeed))) != SceneBlock::MUR))
         mPos -= glm::vec3(mLeft * mSpeed);
+
 	std::cout << mPos.x << " "<<  mPos.y << " "<< mPos.z << std::endl;
+
+	if ((int)scene.get(mPos) > 1)
+		std::cout << "MUUUUUUUUUUUUUUUUUUUUUURRRRRRRRRR" << std::endl;
+
     mLeft = glm::normalize(cross(mUp, mForward));
 
     mLook = mPos.xyz() + mForward;

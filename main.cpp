@@ -55,7 +55,7 @@ int main(int argc, char *argv[])
 	SceneDisplayer displayer(shaderRepository,
 	{
 		std::make_pair(SceneBlock::SOL, std::make_shared<ModelRenderer>("../Models/sol.obj", textureRepository)),
-		std::make_pair(SceneBlock::MUR, std::make_shared<ModelRenderer>("../Models/CubeBasic.obj", textureRepository))
+		std::make_pair(SceneBlock::MUR, std::make_shared<ModelRenderer>("../Models/mur.obj", textureRepository))
 	});
 
 	auto scene = sceneLoader.load("../Models/map.png");
