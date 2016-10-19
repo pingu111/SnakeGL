@@ -2,7 +2,7 @@
 #include <vector>
 #include "../OpenGLTools/glm.h"
 
-enum class SceneBlock {SOL = 1, MUR = 2, UNDEFINED = 3};
+enum class SceneBlock {SOL = 1, MUR = 2, UNDEFINED = 3, COLLECTIBLE = 4};
 
 class Scene {
 public:

@@ -49,13 +49,15 @@ int main(int argc, char *argv[])
 	sceneLoader.load("../Models/map.png",
 	{
 		std::make_pair(0, SceneBlock::MUR), // couleur noir représente un mur
-		std::make_pair(0xffffff, SceneBlock::SOL) 
+		std::make_pair(0xffffff, SceneBlock::SOL),
+		std::make_pair(0xff0000, SceneBlock::COLLECTIBLE),
 	}, 1.f);
 
 	SceneDisplayer displayer(shaderRepository,
 	{
 		std::make_pair(SceneBlock::SOL, std::make_shared<ModelRenderer>("../Models/sol.obj", textureRepository)),
-		std::make_pair(SceneBlock::MUR, std::make_shared<ModelRenderer>("../Models/mur.obj", textureRepository))
+		std::make_pair(SceneBlock::MUR, std::make_shared<ModelRenderer>("../Models/mur.obj", textureRepository)),
+		std::make_pair(SceneBlock::COLLECTIBLE, std::make_shared<ModelRenderer>("../Models/Collectible.obj", textureRepository))
 	});
 
 	auto scene = sceneLoader.load("../Models/map.png");
