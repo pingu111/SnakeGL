@@ -80,6 +80,9 @@ int main(int argc, char *argv[])
 		glm::mat4 perspMatrix(glm::perspective(glm::radians(70.f), (float)device.width() / device.height(), 0.01f, 500.f));
 		displayer.draw(scene, camera.view(), perspMatrix);
 
+		int a;
+		std::cin >> a ;
+
         device.swapBuffers();
     }
 

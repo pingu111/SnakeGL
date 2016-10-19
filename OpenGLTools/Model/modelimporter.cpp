@@ -3,9 +3,12 @@
 #include <assimp/Importer.hpp>
 #include <assimp/scene.h>
 #include <assimp/postprocess.h>
+#include <iostream>
 
 ModelImporter::ModelImporter(const std::string &path, TextureRepository &texManager) {
     Assimp::Importer imp;
+
+	std::cout << "ModelImporter::ModelImporter " << path << std::endl;
 
     std::string globalPath;
     std::size_t last = path.find_last_of('/');

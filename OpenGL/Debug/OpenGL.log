@@ -1,7 +1,13 @@
-﻿cl : Ligne de commande warning D9028: échec de la régénération minimale, passage à la génération normale
-  material.cpp
-  texture.cpp
-  texturerepository.cpp
+﻿  modelrenderer.cpp
+d:\theo\boulot\snakegl\opengltools\model\modelrenderer.cpp(14): warning C4018: '<' : incompatibilité signed/unsigned
+d:\theo\boulot\snakegl\opengltools\model\modelrenderer.cpp(46): warning C4018: '<' : incompatibilité signed/unsigned
+d:\theo\boulot\snakegl\opengltools\model\modelrenderer.cpp(59): warning C4018: '<' : incompatibilité signed/unsigned
+d:\theo\boulot\snakegl\opengltools\model\modelrenderer.cpp(70): warning C4018: '<' : incompatibilité signed/unsigned
+  modelimporter.cpp
   Génération de code en cours...
+  Ignoré... (aucune modification pertinente détectée)
+  main.cpp
+  SceneDisplayer.cpp
+  material.cpp
   OpenGL.vcxproj -> D:\Theo\Boulot\SnakeGL\Debug\OpenGL.exe
   OpenGL.vcxproj -> D:\Theo\Boulot\SnakeGL\Debug\OpenGL.pdb (Full PDB)
