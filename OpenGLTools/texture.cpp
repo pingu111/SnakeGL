@@ -1,5 +1,6 @@
 #include <algorithm>
 #include "texture.h"
+#include <iostream>
 
 Texture::Texture()
 {

@@ -48,9 +48,9 @@ int main(int argc, char *argv[])
 	// On charge la scène dans le loader
 	sceneLoader.load("../Models/map.png",
 	{
+		std::make_pair(0xffffff, SceneBlock::SOL), // blanc = sol,
 		std::make_pair(0, SceneBlock::MUR), // couleur noir représente un mur
-		std::make_pair(0xffffff, SceneBlock::SOL),
-		std::make_pair(0xff0000, SceneBlock::COLLECTIBLE),
+		std::make_pair(255, SceneBlock::COLLECTIBLE) // red  = collectible,
 	}, 1.f);
 
 	SceneDisplayer displayer(shaderRepository,

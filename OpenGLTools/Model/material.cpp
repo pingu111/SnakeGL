@@ -19,6 +19,7 @@ Material::Material(aiMaterial *mtl, TextureRepository &textureManager,
             if(v == '\\')
                 v = '/';
         path = globalPath + path; // On ajoute le chemin de la texture au chemin du dossier
+		std::cout << path << std::endl;
         texture = textureManager.image2D(path);
         useTexture = true;
     }

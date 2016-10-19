@@ -71,8 +71,11 @@ void CameraFPS::update(Scene const &scene)
 
 	std::cout << mPos.x << " "<<  mPos.y << " "<< mPos.z << std::endl;
 
-	if ((int)scene.get(mPos) > 1)
+	if ((int)scene.get(mPos) == 2)
 		std::cout << "MUUUUUUUUUUUUUUUUUUUUUURRRRRRRRRR" << std::endl;
+	else if ((int)scene.get(mPos) == 3)
+		std::cout << "Collectible" << std::endl;
+
 
     mLeft = glm::normalize(cross(mUp, mForward));
 

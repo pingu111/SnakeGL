@@ -1,5 +1,6 @@
 #include <SDL2\SDL_image.h>
 #include "SceneLoader.h"
+#include <iostream>
 
 SceneLoader::SceneLoader() {
 
@@ -20,6 +21,10 @@ Scene SceneLoader::load(std::string const &path,
 		std::vector<SceneBlock> line;
 		for (int j = 0; j < surface->w; ++j) {
 			unsigned color = pixels[i * surface->w + j];
+			if ((int)colorType[color & 0xffffff] == 0)
+			{
+				std::cout << "Probleme avec " << color << " " << (color & 0xffffff) << " " << std::endl;
+			}
 			line.emplace_back(colorType[color & 0xffffff]);
 		}
 		scene.emplace_back(line);

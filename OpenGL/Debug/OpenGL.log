@@ -1,9 +1,7 @@
-﻿  main.cpp
+﻿cl : Ligne de commande warning D9028: échec de la régénération minimale, passage à la génération normale
+  material.cpp
+  texture.cpp
+  texturerepository.cpp
   Génération de code en cours...
-  Ignoré... (aucune modification pertinente détectée)
-  camera.cpp
-  SceneLoader.cpp
-  SceneDisplayer.cpp
-  Scene.cpp
   OpenGL.vcxproj -> D:\Theo\Boulot\SnakeGL\Debug\OpenGL.exe
   OpenGL.vcxproj -> D:\Theo\Boulot\SnakeGL\Debug\OpenGL.pdb (Full PDB)
